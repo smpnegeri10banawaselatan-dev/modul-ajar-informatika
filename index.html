@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <title>Materi Sistem Informasi</title>
+  <style>
+    body { font-family: sans-serif; background: #f0f0f0; margin: 0; padding: 0; }
+    header, nav { background: #061d2b; color: white; padding: 5px; text-align: center; }
+    header img { height: 100px; }
+    nav button { background: white; color: #0277bd; margin: 5px; padding: 8px 15px; border: none; cursor: pointer; font-weight: bold; }
+    section { display: none; padding: 20px; background: white; max-width: 900px; margin: 20px auto; border-radius: 8px; }
+    section.active { display: block; }
+    .lks-item, .siswa-item { margin: 10px 0; }
+    img.hardware { width: 120px; display: block; margin-bottom: 5px; cursor: pointer; }
+    img.zoomable { cursor: zoom-in; transition: 0.3s; }
+    img.zoomable:hover { opacity: 0.8; }
+    #timer { position: fixed; bottom: 10px; right: 10px; background: #0277bd; padding: 8px; font-weight: bold; border-radius: 4px; }
+
+    /* Toast styling */
+    #toast {
+      position: fixed;
+      top: 60px;
+      right: 10px;
+      background: rgba(0,0,0,0.8);
+      color: #fff;
+      padding: 10px 15px;
+      border-radius: 4px;
+      opacity: 0;
+      transition: opacity 0.5s ease;
+      z-index: 1000;
+      pointer-events: none;
+    }
+    #toast.show {
+      opacity: 1;
+    }
+
+    /* Modal Gambar */
+    .modal-gambar {
+      display: none;
+      position: fixed;
+      z-index: 9999;
+      padding-top: 60px;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgba(0,0,0,0.9);
+    }
+
+    .modal-gambar-content {
+      margin: auto;
+      display: block;
+      max-width: 90%;
+      max-height: 80%;
+    }
+
+    .modal-gambar-close {
+      position: absolute;
+      top: 20px;
+      right: 35px;
+      color: #fff;
+      font-size: 40px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    .modal-gambar-close:hover {
+      color: #ccc;
+    }
+    .highlight {
+      background-color: #d0ebff;
+      padding: 10px;
+      border-left: 5px solid #1c7ed6;
+      margin-bottom: 20px;
+    }
+    .section {
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+    }
+     
+
+  </style>
+</head>
+<body>
+
+<header>
+  <div style="display: flex; justify-content: space-between; align-items: center;">
+    <img src="gambar/pemda.png" alt="Pemda" />
+    <div>
+      <h1>PEMERINTAH KABUPATEN DONGGALA</h1>
+      <h2>SMPN 10 BANAWA SELATAN</h2>
+      <p>Alamat : Jalan PNPM Dusun III Bambami, Desa Malino, Kec. Banawa Selatan</p>
+    </div>
+    <img src="gambar/tutwuri.png" alt="Tut Wuri" />
+  </div>
+</header>
+
+<nav>
+  <button onclick="show('home')">Beranda</button>
+  <button onclick="show('hardware')">Hardware</button>
+  <button onclick="show('software')">Software</button>
+  <button onclick="show('video')">Video</button>
+  <button onclick="show('lks')">Tugas Kelompok</button>
+  <button onclick="show('siswa')">Tugas Individu</button>
+  <button onclick="show('hasil')">Hasil Pengisian</button>
+</nav>
+
+<section id="home" class="active">
+  <h3>Kegiatan Pendahuluan</h3>
+  <p>Materi Sistem Informasi: Pengenalan Hardware & Software</p>
+  <p>Salam Pembuka / Menanyakan Kabar</p>
+  <p>Berdoa Bersama / Menyanyikan Lagu Nasional</p>
+  <p>Cek Kehadiran</p>
+  <p>Ice Breaking (cara mematikan komputer yang benar adalah, proses menghidupkan komputer disebut (booting),untuk melakukan pengetikan huruf atau angka menggunakan ...(keyboard). )</p>
+  <p>Apersepsi (apa yang kalian ketahui tentang hardware komputer)</p>
+  <p>Tujuan Pembelajaran (Mengenal dan Memahami Komponen - komponen Hardware yang digunakan dalam sistem komputer , seperti CPU,RAM,Motherboard)</p>
+  <h3>Kegiatan Inti</h3>
+  <p>Menampilkan Video (5 Menit)</p>
+  <p>Pertanyaan Pemantik Terkait Video (5 Menit)</p>
+  <p>penjelasan Materi Singkat Tentang Hardware (5-10 Menit)</p>
+  <p>Pembagian Kelompok (3-5 Menit)</p>
+  <p>Pembagian dan Penjelasan LKPD (3-5 Menit)</p>
+  <p>Siswa Mengerjakan LKPD (10-15 Menit)</p>
+  <p>Ice Breaking (2-3 Menit)</p>
+  <p>Presentasi Kelompok (10-15 Menit)</p>
+  <p>guru memberikan apresiasi / Umpan Balik Kepada Kelompok yang tampil</p>
+  <h3>Kegiatan Penutup</h3>
+  <p>Evaluasi Pembelajaran</p>
+  <p>Refleksi Guru</p>
+  <p>Kesimpulan Materi bersama siswa</p>
+  <p>Umpan Balik dari siswa (refleksi Siswa)</p>
+  <p>guru menyampaikan materi yang akan dibahas pada pertemuan selanjutnya</p>
+  <p>Doa dan Penutup Kegiatan Pembelajaran</p>
+  <p>Guru Meninggalkan Ruang Kelas.</p>
+</section>
+
+<section id="hardware">
+  <h3>Hardware</h3>
+  <p>Perangkat keras (hardware) adalah bagian fisik dari komputer.</p>
+  <p>Hardware adalah komponen fisik dari komputer yang bisa dilihat dan disentuh. Hardware ini berfungsi untuk menjalankan berbagai tugas dalam pengolahan data.</p>
+  <p>Contoh hardware utama komputer:</p>
+  <p>
+    <strong>CPU (Central Processing Unit)</strong><br>
+    <img src="gambar/cpu.png" alt="Gambar CPU" width="300" class="zoomable">
+  </p>
+  <p>Otak dari komputer yang melakukan semua perhitungan dan pengolahan data.</p>
+  <h3>RAM (Random Access Memory)</h3>
+  <p>Memori sementara yang digunakan untuk menyimpan data dan program yang sedang aktif digunakan.</p>
+  <p>Contoh RAM (Random Access Memory)</p>
+  <p>
+    <strong>RAM (Random Access Memory)</strong><br>
+    <img src="gambar/laptop-vs-desktop-ram.jpg" alt="Gambar laptop-vs-desktop-ram" width="300" class="zoomable">
+  </p>
+  <h3>Hard Drive (HDD) / SSD (Solid State Drive)</h3>
+  <p>Media penyimpanan permanen untuk data dan program.</p>
+  <p>Dalam sebuah perangkat komputer baik yang berupa PC Dekstop maupun Laptop, media penyimpanan merupakan salah satu komponen mutlak. Jika tidak terdapat media penyimpanan, maka prangkat komputer tersebut tidak akan dapat digunakan. Selama ini, harddisk atau yang disingkat HDD merupakan media penyimpanan paling populer pada komputer. Hal ini disebabkan karena harddisk memiliki kapasitas penyimpanan yang lebih besar dibanding media penyimpanan lainnya.
+
+Namun, seiring dengan perkembangan teknologi yang sangat pesat, maka media penyimpanan pun mengkuti perkembangan tersebut. Saat ini, HDD sudah tidak lagi menjadi primadona semenjak hadirnya generasi baru yang disebut Solid State Drive atau SSD. Teknologi SSD merupakan hasil pengembangan teknologi HDD yang bertujuan untuk memenuhi dan mengimbangi perkembangan teknologi komponen lain pada komputer.</p>
+  <p>
+    <strong>Contoh: Hard Drive (HDD) / SSD (Solid State Drive)</strong><br>
+    <img src="gambar/perbedaan-hdd-dan-ssd-pada-laptop.jpg" alt="Gambar perbedaan-hdd-dan-ssd-pada-laptop" width="300" class="zoomable">
+  </p>
+  <h3>Motherboard</h3>
+  <p>papan sirkuit utama pada komputer yang menghubungkan dan memungkinkan semua komponen perangkat keras (hardware) untuk berkomunikasi dan beroperasi bersama</p>
+  <p>motherboard adalah "otak" dari komputer karena menjadi fondasi yang mengkoordinasikan berbagai komponen seperti CPU, RAM, kartu grafis, dan perangkat penyimpanan</p>
+  <p>
+    <strong>Contoh Motherboard</strong><br>
+    <img src="gambar/motherboard.jpg" alt="Gambar motherboard" width="300" class="zoomable">
+  </p>
+  <h3>Power Supply Unit (PSU)</h3>
+  <p>komponen elektronik yang berfungsi sebagai penyedia daya listrik untuk perangkat elektronik, termasuk komputer dan perangkat lainnya</p>
+  <p>Secara umum, power supply mengubah energi listrik dari sumber utama (seperti listrik PLN) menjadi energi listrik yang sesuai dengan kebutuhan perangkat elektronik</p>
+  <p>
+    <strong>Contoh Power Supply Unit (PSU)</strong><br>
+    <img src="gambar/psu-BTX.jpg" alt="Gambar psu-BTX" width="300" class="zoomable">
+  </p>
+  <h3>Monitor</h3>
+  <p>Fungsi utama monitor komputer adalah menampilkan informasi yang diproses oleh komputer dalam bentuk visual, seperti teks, gambar, video, dan grafik</p>
+  <p>Monitor memungkinkan pengguna untuk berinteraksi dengan komputer, menjalankan program, dan melihat hasil dari berbagai aktivitas komputasi.</p>
+  <p>
+    <strong>Contoh Layar Monitor</strong><br>
+    <img src="gambar/monitor-1_169.png" alt="monitor-1_169" width="300" class="zoomable">
+  </p>
+</section>
+
+<section id="software">
+  <h1>Pengenalan Software</h1>
+
+  <div class="highlight">
+    <p>Setelah paham tentang hardware, penting juga mengetahui <strong>software</strong> karena keduanya saling terkait dalam menjalankan komputer.</p>
+  </div>
+
+  <div class="section">
+    <h2>1. Software (Perangkat Lunak)</h2>
+    <p>Software adalah program atau kumpulan instruksi yang memberitahu hardware apa yang harus dilakukan. Software tidak bisa disentuh secara fisik, tetapi sangat penting agar komputer bisa berfungsi.</p>
+  </div>
+
+  <div class="section">
+    <h2>2. Jenis-Jenis Software</h2>
+
+    <h3>a. Software Sistem</h3>
+    <p>Software yang mengontrol operasi hardware dan menyediakan platform untuk menjalankan software lain. Contohnya:</p>
+    <ul>
+      <li>Sistem Operasi (Windows, macOS, Linux)</li>
+      <li>Driver perangkat keras</li>
+    </ul>
+
+    <h3>b. Software Aplikasi</h3>
+    <p>Program yang membantu pengguna melakukan tugas tertentu. Contohnya:</p>
+    <ul>
+      <li>Microsoft Word (pengolah kata)</li>
+      <li>Google Chrome (browser internet)</li>
+      <li>Adobe Photoshop (pengolah gambar)</li>
+    </ul>
+
+    <h3>c. Software Middleware</h3>
+    <p>Software yang menjadi penghubung antara software sistem dan software aplikasi agar bisa bekerja bersama.</p>
+  </div>
+
+  <div class="section">
+    <h2>3. Bagaimana Hardware dan Software Bekerja Sama?</h2>
+    <ul>
+      <li>Hardware menjalankan perintah yang diberikan oleh software.</li>
+      <li>Software memberi instruksi untuk memproses data, mengelola file, dan menampilkan hasil ke pengguna melalui hardware.</li>
+    </ul>
+  </div>
+</section>
+
+<section id="video">
+  <h3>Video Pembelajaran</h3>
+
+  <video width="480" controls>
+    <source src="video/video-pembelajaran.mp4" type="video/mp4" />
+    Browser Anda tidak mendukung video.
+  </video>
+
+  <!-- Gambar Thumbnail -->
+  <img src="gambar/cpu.png" alt="Gambar CPU" width="480" class="zoomable" style="display: block; margin-bottom: 10px; border-radius: 8px;">
+
+  <img src="gambar/output.jpg" alt="Gambar Output" width="480" class="zoomable" style="display: block; margin-bottom: 10px; border-radius: 8px;">
+</section>
+
+
+<section id="lks">
+  <h3>Tugas Kelompok LKS</h3>
+  <h2>Cocokan Gambar yang sesuai di bawah ini !</h2>
+  <form id="lksForm">
+    <div><label>Nama: <input type="text" id="lksName" required /></label></div><br />
+    <div class="lks-item">
+      <p>1. Gambar dibawah ini memiliki fungsi menampilkan gambar</p>
+      <img src="gambar/monitor-1_169.png" class="hardware zoomable" />
+      <select name="lks1">
+        <option value="">-- Pilih --</option>
+        <option>CPU</option>
+        <option>Monitor</option>
+        <option>Keyboard</option>
+      </select>
+    </div>
+    <div class="lks-item">
+      <p>2. Gambar dibawah ini memiliki fungsi untuk melakukan pengetikan</p>
+      <img src="gambar/keyboard.jpg" class="hardware zoomable" />
+      <select name="lks2">
+        <option value="">-- Pilih --</option>
+        <option>Keyboard</option>
+        <option>Mouse</option>
+        <option>Monitor</option>
+      </select>
+    </div>
+    <div class="lks-item">
+      <p>3. Gambar dibawah ini sebagai penunjuk arah panah </p>
+      <img src="gambar/mouse.jpg" class="hardware zoomable" />
+      <select name="lks3">
+        <option value="">-- Pilih --</option>
+        <option>Mouse</option>
+        <option>CPU</option>
+        <option>Monitor</option>
+      </select>
+    </div>
+    <div class="lks-item">
+      <p>4. Gambar dibawah ini papan penghubung perangkat komputer</p>
+      <img src="gambar/motherboard.jpg" class="hardware zoomable" />
+      <select name="lks3">
+        <option value="">-- Pilih --</option>
+        <option>Motherboard</option>
+        <option>CPU</option>
+        <option>Monitor</option>
+      </select>
+    </div>
+    <div class="lks-item">
+      <p>5. Gambar dibawah ini sebagai tempat penyimpanan data sementara</p>
+      <img src="gambar/laptop-vs-desktop-ram.jpg" class="hardware zoomable" />
+      <select name="lks3">
+        <option value="">-- Pilih --</option>
+        <option>RAM (Memory)</option>
+        <option>CPU</option>
+        <option>Monitor</option>
+      </select>
+    </div>
+    <div class="lks-item">
+      <p>6. Gambar dibawah ini memiliki fungsi Tempat Penyimpanan Data</p>
+      <img src="gambar/perbedaan-hdd-dan-ssd-pada-laptop.jpg" class="hardware zoomable" />
+      <select name="lks3">
+        <option value="">-- Pilih --</option>
+        <option>harddisk</option>
+        <option>CPU</option>
+        <option>Monitor</option>
+      </select>
+    </div>
+    <div class="lks-item">
+      <p>7. Gambar dibawah ini memiliki fungsi sebagai Penghubung Arus Listrik</p>
+      <img src="gambar/psu-BTX.jpg" class="hardware zoomable" />
+      <select name="lks3">
+        <option value="">-- Pilih --</option>
+        <option>Mouse</option>
+        <option>PSU (Power Supply)</option>
+        <option>Monitor</option>
+      </select>
+    </div>
+    <div class="lks-item">
+      <p>8. Gambar dibawah ini memiliki fungsi mencetak dokumen</p>
+      <img src="gambar/printer.jpg" class="hardware zoomable" />
+      <select name="lks3">
+        <option value="">-- Pilih --</option>
+        <option>Printer</option>
+        <option>CPU</option>
+        <option>Monitor</option>
+      </select>
+    </div>
+    <div class="lks-item">
+      <p>9. Gambar dibawah ini Memiliki Fungsi Mendengarkan Suara</p>
+      <img src="gambar/sound.jpg" class="hardware zoomable" />
+      <select name="lks3">
+        <option value="">-- Pilih --</option>
+        <option>Mouse</option>
+        <option>Speaker</option>
+        <option>Monitor</option>
+      </select>
+    </div>
+    <div class="lks-item">
+      <p>10. Gambar dibawah ini Memiliki Fungsi Menyalin Dokumen</p>
+      <img src="gambar/scanner.jpg" class="hardware zoomable" />
+      <select name="lks3">
+        <option value="">-- Pilih --</option>
+        <option>Scaner</option>
+        <option>CPU</option>
+        <option>Monitor</option>
+      </select>
+    </div>
+    <button type="button" onclick="submitLKS()">Simpan LKS</button>
+  </form>
+</section>
+
+<section id="siswa">
+  <h3>Lembar Observasi Individu Siswa</h3>
+  <form id="siswaForm">
+    <div><label>Nama: <input type="text" id="siswaName" required /></label></div><br />
+    <div class="siswa-item">
+      <label>1. Apa yang dimaksud dengan perangkat keras (hardware) pada komputer ?</label><br />
+      <input type="text" name="q1" />
+    </div>
+    <div class="siswa-item">
+      <label>2. Jelaskan Fungsi Scaner dan Berikan alasannya.</label><br />
+      <input type="text" name="q2" />
+    </div>
+    <div class="siswa-item">
+      <label>3. Menurutmu, mengapa komputer memerlukan mouse? Apa yang akan terjadi jika mouse tidak berfungsi?</label><br />
+      <input type="text" name="q3" />
+    </div>
+    <div class="siswa-item">
+      <label>4. Apa fungsi keyboard pada komputer dan bagaimana cara penggunaannya?</label><br />
+      <input type="text" name="q4" />
+    </div>
+    <div class="siswa-item">
+      <label>5. Apa yang kamu ketahui tentang printer? Termasuk jenis perangkat keras apa dan apa fungsinya?</label><br />
+      <input type="text" name="q5" />
+    </div>
+    <div class="siswa-item">
+      <label>6. Jelaskan peran CPU dalam menjalankan perintah di komputer. Mengapa disebut otaknya komputer?</label><br />
+      <input type="text" name="q6" />
+    </div>
+    <div class="siswa-item">
+      <label>7. Jika kamu ingin mengetik tugas di komputer, perangkat keras apa saja yang kamu butuhkan? Jelaskan.</label><br />
+      <input type="text" name="q7" />
+    </div>
+    <div class="siswa-item">
+      <label>8. Mengapa monitor termasuk perangkat output? Berikan alasannya.</label><br />
+      <input type="text" name="q8" />
+    </div>
+    <div class="siswa-item">
+      <label>9. Sebutkan tiga contoh perangkat keras komputer yang sering kamu lihat di sekolah!
+
+</label><br />
+      <input type="text" name="q9" />
+    </div>
+    <div class="siswa-item">
+      <label>10. Sebutkan dan jelaskan fungsi dari dua perangkat input pada komputer!</label><br />
+      <input type="text" name="q10" />
+    </div>
+    <button type="button" onclick="submitSiswa()">Simpan Jawaban</button>
+  </form>
+</section>
+
+<section id="hasil">
+  <h3>Hasil Pengisian Siswa</h3>
+  <div id="hasilOutput">Belum ada data.</div>
+  <p><strong>Jumlah siswa yang mengisi:</strong> <span id="jumlahSiswa">0</span></p>
+  <button onclick="resetData()">Reset Data</button>
+</section>
+
+<!-- Modal Zoom Gambar -->
+<div id="modalGambar" class="modal-gambar">
+  <span class="modal-gambar-close" onclick="tutupModalGambar()">&times;</span>
+  <img class="modal-gambar-content" id="gambarZoom">
+</div>
+
+<script>
+  function show(id) {
+    document.querySelectorAll("section").forEach(s => s.classList.remove("active"));
+    document.getElementById(id).classList.add("active");
+    if (id === "hasil") tampilkanHasil();
+  }
+
+  function showToast(pesan) {
+    const toast = document.getElementById("toast");
+    toast.textContent = pesan;
+    toast.classList.add("show");
+    setTimeout(() => toast.classList.remove("show"), 4000);
+  }
+
+  function submitLKS() {
+    const name = document.getElementById("lksName").value.trim();
+    const form = document.getElementById("lksForm");
+
+    if (!name) {
+      showToast("Nama harus diisi!");
+      return;
+    }
+
+    let lksData = JSON.parse(localStorage.getItem("lksData") || "[]");
+    if (lksData.some(d => d.nama.toLowerCase() === name.toLowerCase())) {
+      showToast("Nama sudah digunakan untuk LKS!");
+      return;
+    }
+
+    lksData.push({
+      nama: name,
+      jawaban: {
+        lks1: form.lks1.value,
+        lks2: form.lks2.value,
+        lks3: form.lks3.value,
+      },
+    });
+
+    localStorage.setItem("lksData", JSON.stringify(lksData));
+    showToast("Jawaban LKS disimpan!");
+    form.reset();
+  }
+
+  function submitSiswa() {
+    const name = document.getElementById("siswaName").value.trim();
+    const form = document.getElementById("siswaForm");
+
+    if (!name) {
+      showToast("Nama harus diisi!");
+      return;
+    }
+
+    let siswaData = JSON.parse(localStorage.getItem("siswaData") || "[]");
+    if (siswaData.some(d => d.nama.toLowerCase() === name.toLowerCase())) {
+      showToast("Nama sudah digunakan untuk isian siswa!");
+      return;
+    }
+
+    siswaData.push({
+      nama: name,
+      isian: {
+        q1: form.q1.value,
+        q2: form.q2.value,
+        q3: form.q3.value,
+        q4: form.q4.value,
+        q5: form.q5.value,
+        q6: form.q6.value,
+        q7: form.q7.value,
+        q8: form.q8.value,
+        q9: form.q9.value,
+        q10: form.q10.value,
+      },
+    });
+
+    localStorage.setItem("siswaData", JSON.stringify(siswaData));
+    showToast("Jawaban Isian disimpan!");
+    form.reset();
+  }
+
+  function tampilkanHasil() {
+    const lksList = JSON.parse(localStorage.getItem("lksData") || "[]");
+    const siswaList = JSON.parse(localStorage.getItem("siswaData") || "[]");
+
+    let html = "";
+    lksList.forEach(data => {
+      html += `<h4>LKS - ${data.nama}</h4><ul>
+        <li>Gambar 1: ${data.jawaban.lks1}</li>
+        <li>Gambar 2: ${data.jawaban.lks2}</li>
+        <li>Gambar 3: ${data.jawaban.lks3}</li>
+        <li>Gambar 4: ${data.jawaban.lks4}</li>
+        <li>Gambar 5: ${data.jawaban.lks5}</li>
+        <li>Gambar 6: ${data.jawaban.lks6}</li>
+        <li>Gambar 7: ${data.jawaban.lks7}</li>
+        <li>Gambar 8: ${data.jawaban.lks8}</li>
+        <li>Gambar 9: ${data.jawaban.lks9}</li>
+        <li>Gambar 10: ${data.jawaban.lks10}</li>
+      </ul>`;
+    });
+
+    siswaList.forEach(data => {
+      html += `<h4>Isian - ${data.nama}</h4><ul>
+        <li>1. ${data.isian.q1}</li>
+        <li>2. ${data.isian.q2}</li>
+        <li>3. ${data.isian.q3}</li>
+        <li>4. ${data.isian.q4}</li>
+        <li>5. ${data.isian.q5}</li>
+        <li>6. ${data.isian.q6}</li>
+        <li>7. ${data.isian.q7}</li>
+        <li>8. ${data.isian.q8}</li>
+        <li>9. ${data.isian.q9}</li>
+        <li>10. ${data.isian.q10}</li>
+      </ul>`;
+    });
+
+    const semuaNama = [
+      ...lksList.map(d => d.nama.toLowerCase()),
+      ...siswaList.map(d => d.nama.toLowerCase())
+    ];
+    const namaUnik = [...new Set(semuaNama)];
+
+    document.getElementById("hasilOutput").innerHTML = html || "Belum ada data disimpan.";
+    document.getElementById("jumlahSiswa").textContent = namaUnik.length;
+  }
+
+  function resetData() {
+    if (confirm("Apakah Anda yakin ingin menghapus semua data?")) {
+      localStorage.removeItem("lksData");
+      localStorage.removeItem("siswaData");
+      tampilkanHasil();
+      showToast("Data berhasil direset.");
+    }
+  }
+
+  // Zoom gambar (semua yang pakai class="zoomable")
+const zoomableImages = document.querySelectorAll("img.zoomable");
+const modalGambar = document.getElementById("modalGambar");
+const gambarZoom = document.getElementById("gambarZoom");
+
+zoomableImages.forEach(img => {
+  img.addEventListener("click", () => {
+    modalGambar.style.display = "block";
+    gambarZoom.src = img.src;
+  });
+});
+
+function tutupModalGambar() {
+  modalGambar.style.display = "none";
+}
+
+modalGambar.addEventListener("click", function (event) {
+  if (event.target === modalGambar) {
+    tutupModalGambar();
+  }
+});
+</script>
+<footer style="background: #061d2b; color: white; text-align: center; padding: 15px; position: relative; margin-top: 40px;">
+  &copy; 2025 SMP NEGERI 10 Banawa Selatan - Komunitas Belajar Tonda Talusi  | Dikembangkan oleh Guru Informatika
+</footer>
+</body>
+</html>
